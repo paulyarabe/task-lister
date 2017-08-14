@@ -1,0 +1,7 @@
+html {
+	background: #8fd3f4;
+	background-image: url('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?dpr=1&auto=format&fit=crop&w=1080&h=720&q=80&cs=tinysrgb&crop=');
+	background-size: cover;
+	height: 100%;
+	min-height: 100%;
+}
