@@ -26,6 +26,7 @@ class List extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <label>Add a new list:</label>
           <input value={this.state.listName} onChange={this.handleChange} />
           <button>Add</button>
         </form>
