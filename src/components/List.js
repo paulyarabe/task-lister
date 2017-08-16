@@ -3,23 +3,10 @@ import React from 'react'
 
 class List extends React.Component {
 
-  constructor(){
-    super()
-    this.state = {
-      listNameInput: ''
-    }
-  }
-
-  handleChange = (e) => {
-    const listNameInput = e.target.value
-    this.setState ({
-      listNameInput: listNameInput
-    })
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createListObject(this.state.listNameInput)
+    let listName = document.getElementById('list-name-input').value
+    this.props.createListObject(listName)
   }
 
   render() {
@@ -27,9 +14,8 @@ class List extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>Add a new list:</label>
-          <input placeholder="Enter List Name" value={this.state.listName} onChange={this.handleChange} />
+          <input id="list-name-input" placeholder="Enter List Name" required/>
           <button type="submit">add</button>
-
         </form>
       </div>
     );
