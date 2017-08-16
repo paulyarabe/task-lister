@@ -30,7 +30,7 @@ class Task extends React.Component {
           {this.props.addOption()}
         </select>
           <label>Add a new task:</label>
-          <input name="taskName" value={this.state.taskName} onChange={this.handleInput} />
+          <input placeholder="Enter Task" name="taskName" value={this.state.taskName} onChange={this.handleInput} />
           <label>Note the priority</label>
           <select id="priorityDropdown" name="taskPriority" onChange={this.handleSelect}>
             <option value="1">Do it now (urgent &amp; important)</option>

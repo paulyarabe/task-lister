@@ -27,7 +27,9 @@ class List extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>Add a new list:</label>
-          <input value={this.state.listName} onChange={this.handleChange} />
+          <input placeholder="Enter List Name" value={this.state.listName} onChange={this.handleChange} />
+          <button type="submit">add</button>
+
         </form>
       </div>
     );
