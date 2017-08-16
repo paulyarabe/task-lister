@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import List from './components/List'
+import Task from './components/Task'
+import Lists from './components/Lists'
 
-let id = 0
+let listId = 0
+let taskId = 0
 
 class App extends Component {
 
@@ -10,14 +13,15 @@ class App extends Component {
     super()
 
     this.state = {
-      lists: []
+      lists: [],
+      tasks: []
     }
   }
 
-  createList = (name) => {
+  createList = (listName) => {
     let listObject = {
-      id: id++,
-      name: name,
+      id: listId++,
+      name: listName,
       tasks: [],
     }
     this.setState({
@@ -25,11 +29,31 @@ class App extends Component {
     })
   }
 
+  addToDropdown = () => {
+    return this.state.lists.map(function(list){
+      return <option key={list.id} value={list.id}>{list.name}</option>
+    })
+  }
+
+  createTask = (name, priority, listId) => {
+    let taskObject = {
+      id: taskId++,
+      name: name,
+      priority: priority,
+      listId: listId
+    }
+    this.state.lists[listId].tasks.push(taskObject)
+    this.setState({
+      tasks: [...this.state.tasks, taskObject]
+    })
+  }
+
   render() {
-    console.log(this.state.lists)
     return (
       <div>
-        <List createListObject={this.createList}/>
+        <List createListObject={this.createList} />
+        <Task addOption={this.addToDropdown} createTask={this.createTask}/>
+        <Lists lists={this.state.lists}/>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class List extends React.Component {
   }
 
   handleChange = (e) => {
-    let listNameInput = e.target.value
+    const listNameInput = e.target.value
     this.setState ({
       listNameInput: listNameInput
     })
@@ -28,7 +28,6 @@ class List extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>Add a new list:</label>
           <input value={this.state.listName} onChange={this.handleChange} />
-          <button>Add</button>
         </form>
       </div>
     );
