@@ -3,6 +3,7 @@ import './App.css';
 import List from './components/List'
 import Task from './components/Task'
 import Lists from './components/Lists'
+import Options from './components/Options'
 
 let listId = 0
 let taskId = 0
@@ -14,10 +15,13 @@ class App extends Component {
 
     this.state = {
       lists: [],
-      tasks: []
+      tasks: [],
+      listId: 0
     }
   }
 
+  //set the list that the task belongs to automatically,
+  //based on the most recent list entered.  UX decision.
   createList = (listName) => {
     let listObject = {
       id: listId++,
@@ -25,13 +29,14 @@ class App extends Component {
       tasks: [],
     }
     this.setState({
-      lists: [...this.state.lists, listObject]
+      lists: [...this.state.lists, listObject],
+      listId: listObject.id
     })
   }
 
   addToDropdown = () => {
     return this.state.lists.map(function(list){
-      return <option key={list.id} value={list.id}>{list.name}</option>
+      return <option key={list.id} value={list.id} selected>{list.name}</option>
     })
   }
 
@@ -48,11 +53,17 @@ class App extends Component {
     })
   }
 
+  //set the list that the task belongs to after a select
+  handleSelect = (e) => this.setState({ [e.target.name]: parseInt(e.target.value) })
+
   render() {
+    console.log(this.state)
+    console.log(this.state.lists)
     return (
       <div>
         <List createListObject={this.createList} />
-        <Task addOption={this.addToDropdown} createTask={this.createTask}/>
+        <Options addOption={this.addToDropdown} handleSelect={this.handleSelect}  />
+        <Task  createTask={this.createTask} belongsToWhichList={this.state.listId}/>
         <Lists lists={this.state.lists}/>
       </div>
     );

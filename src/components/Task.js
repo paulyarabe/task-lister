@@ -8,27 +8,19 @@ class Task extends React.Component {
     this.state = {
       taskName: '',
       taskPriority: '1',
-      listId: 0
     }
   }
-
-  handleSelect = (e) => this.setState({ [e.target.name]: parseInt(e.target.value) })
 
   handleInput = (e) => this.setState({ [e.target.name]: e.target.value })
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createTask(this.state.taskName, this.state.taskPriority, this.state.listId)
+    this.props.createTask(this.state.taskName, this.state.taskPriority, this.props.belongsToWhichList)
   }
 
   render() {
-    {console.log(this.state)}
     return (
       <form onSubmit={this.handleSubmit}>
-        <select id="listDropdown" name="listId" onChange={this.handleSelect}>
-          <option defaultValue="default">Choose List</option>
-          {this.props.addOption()}
-        </select>
         <label>Add a new task:</label>
         <input placeholder="Enter Task" name="taskName" value={this.state.taskName} onChange={this.handleInput} required/>
         <label>Note the priority</label>

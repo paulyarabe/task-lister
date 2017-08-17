@@ -1,11 +1,8 @@
 import React from 'react'
 
-
-// Presentational Component
-//just loop through the lists and render out the lists and tasks.
 //TODO delete a list, delete a task
 //TODO reset inputs to blank after submission
-//TODO validate - do not push to state if listName or task description is blank
+
 class Lists extends React.Component {
 
   render() {
