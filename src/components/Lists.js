@@ -5,13 +5,16 @@ import React from 'react'
 
 class Lists extends React.Component {
 
+  getListItem = (e) => this.props.deletingList(e.target.dataset.id)
   render() {
+
     let lists = this.props.lists.map(listObj => {
       let tasks = listObj.tasks.map((task, id) => {
-        return <ul key={id}>{task.name} | {task.priority}</ul>
+        return <ul key={id}>{task.name} | {task.priority} <button>Delete Task</button></ul>
       })
-        return <div>List: {listObj.name} | Tasks: {tasks} </div>
+        return <div>List: {listObj.name} <button onClick={this.getListItem} data-id={listObj.id} >Delete List</button>|  Tasks: {tasks} </div>
     })
+
 
     return (
       <div>

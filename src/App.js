@@ -40,6 +40,16 @@ class App extends Component {
     })
   }
 
+  deleteList = (listId) => {
+  const lists = this.state.lists
+  let arrayOfIds =  this.state.lists.map((list) => list.id)
+  let varIndex = arrayOfIds.indexOf(listId)
+  delete lists[varIndex]
+  this.setState({
+      lists: lists
+    })
+  }
+
   createTask = (name, priority, listId) => {
     let taskObject = {
       id: taskId++,
@@ -64,7 +74,7 @@ class App extends Component {
         <List createListObject={this.createList} />
         <Options addOption={this.addToDropdown} handleSelect={this.handleSelect}  />
         <Task  createTask={this.createTask} belongsToWhichList={this.state.listId}/>
-        <Lists lists={this.state.lists}/>
+        <Lists lists={this.state.lists} deletingList={this.deleteList}/>
       </div>
     );
   }
