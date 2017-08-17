@@ -6,6 +6,7 @@ class List extends React.Component {
     e.preventDefault()
     let listName = document.getElementById('list-name-input').value
     this.props.createListObject(listName)
+    document.getElementById('list-name-input').value = ""
   }
 
   render() {
