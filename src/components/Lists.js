@@ -1,20 +1,15 @@
 import React from 'react'
 
-//TODO delete a list, delete a task
-//TODO reset inputs to blank after submission
-
 class Lists extends React.Component {
 
-  getListItem = (e) => this.props.deletingList(e.target.dataset.id)
   render() {
 
-    let lists = this.props.lists.map(listObj => {
-      let tasks = listObj.tasks.map((task, id) => {
-        return <ul key={id}>{task.name} | {task.priority} <button>Delete Task</button></ul>
+    let lists = this.props.lists.map(list => {
+      let tasks = list.tasks.map((task, id) => {
+        return <ul key={id}>{task.name} | {task.priority} <button>See ya!</button></ul>
       })
-        return <div>List: {listObj.name} <button onClick={this.getListItem} data-id={listObj.id} >Delete List</button>|  Tasks: {tasks} </div>
+        return <div>List: {list.name} <button onClick={this.props.deleteList} data-id={list.id}>Bye</button>|  Tasks: {tasks} </div>
     })
-
 
     return (
       <div>

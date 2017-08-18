@@ -20,8 +20,6 @@ class App extends Component {
     }
   }
 
-  //set the list that the task belongs to automatically,
-  //based on the most recent list entered.  UX decision.
   createList = (listName) => {
     let listObject = {
       id: listId++,
@@ -35,20 +33,20 @@ class App extends Component {
   }
 
   addToDropdown = () => {
-    return this.state.lists.map(function(list){
+    return this.state.lists.map( list => {
       return <option key={list.id} value={list.id} selected>{list.name}</option>
     })
   }
 
-  deleteList = (listId) => {
-  const lists = this.state.lists
-  let arrayOfIds =  this.state.lists.map((list) => list.id)
-  let varIndex = arrayOfIds.indexOf(listId)
-  delete lists[varIndex]
-  this.setState({
-      lists: lists
+  deleteList = (e) => {
+    const lists = this.state.lists
+    let listID = parseInt(e.target.dataset.id)
+    let indexOfList = lists.findIndex( l => l.id === listID )
+    this.setState({
+      lists: [...lists.slice(0, indexOfList), ...lists.slice(indexOfList + 1)]
     })
   }
+
 
   createTask = (name, priority, listId) => {
     let taskObject = {
@@ -67,14 +65,12 @@ class App extends Component {
   handleSelect = (e) => this.setState({ [e.target.name]: parseInt(e.target.value) })
 
   render() {
-    console.log(this.state)
-    console.log(this.state.lists)
     return (
       <div>
         <List createListObject={this.createList} />
         <Options addOption={this.addToDropdown} handleSelect={this.handleSelect}  />
         <Task  createTask={this.createTask} belongsToWhichList={this.state.listId}/>
-        <Lists lists={this.state.lists} deletingList={this.deleteList}/>
+        <Lists lists={this.state.lists} deleteList={this.deleteList} />
       </div>
     );
   }
